@@ -1,0 +1,8 @@
+# kept out of the public repo until the patent filing (2026-10-24); originals in website_work/after_filing
+static/model/
+static/pdf/
+cad.html
+*.urdf
+*.stl
+*.step
+*.stp

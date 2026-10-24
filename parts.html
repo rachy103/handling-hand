@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Handling Hand: Parts</title>
+  <meta name="description" content="Bill of materials for Handling Hand, a 16-DoF robotic hand that costs 87,340 KRW in parts.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✋</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500,700|Noto+Sans:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="static/js/index.js" defer></script>
+  <style>
+    .bom-img { width: 150px; max-width: 28vw; aspect-ratio: 4/3; object-fit: cover; border-radius: 6px; background: #eef0f2; }
+    .bom-icon { width: 150px; max-width: 28vw; aspect-ratio: 4/3; border-radius: 6px; background: #eef0f2;
+      display: flex; align-items: center; justify-content: center; font-size: 2.2rem; color: #6b6b6b; }
+    .bom td { vertical-align: middle; }
+    .step-card { border: 1px solid #e6e6e6; border-radius: 10px; padding: 14px 16px; height: 100%; }
+    .step-num { font-family: 'Google Sans', sans-serif; font-weight: 700; color: #2b5fb4; font-size: 1.4rem; }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light site-nav">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#siteNav"
+        aria-controls="siteNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="siteNav">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="./">Main Page</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="parts.html">Parts</a></li>
+          <li class="nav-item"><a class="nav-link" href="./#design">Design</a></li>
+          <li class="nav-item"><a class="nav-link" href="./#full-videos">Videos</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container">
+      <h1 class="title is-3 section-heading">Parts List</h1>
+      <p class="section-sub">Everything needed for one hand costs <b>87,340 KRW</b>. All actuators are
+        MG90S metal-gear micro servos that are taken out of their housings and rebuilt inside the 3D-printed
+        fingers; everything else is a standard hobby-electronics part.</p>
+
+      <div class="row g-3 justify-content-center my-2">
+        <div class="col-6 col-md-3 col-lg-2"><div class="stat-card"><div class="stat-value">₩87,340</div><div class="stat-label">total parts cost</div></div></div>
+        <div class="col-6 col-md-3 col-lg-2"><div class="stat-card"><div class="stat-value">16</div><div class="stat-label">MG90S servos<br>(38% of the cost)</div></div></div>
+        <div class="col-6 col-md-3 col-lg-2"><div class="stat-card"><div class="stat-value">1 kg</div><div class="stat-label">PLA+ filament spool<br>for all printed parts</div></div></div>
+      </div>
+
+      <div class="table-responsive mt-3">
+        <table class="table table-striped bom spec-table">
+          <thead>
+            <tr><th scope="col" style="width:170px">Item</th><th scope="col">Name</th><th scope="col" class="num">Quantity</th><th scope="col" class="num">Cost (ea., KRW)</th><th scope="col" class="num">Total (KRW)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><img class="bom-img" src="static/images/parts/servo.jpg" alt="MG90S micro servo, disassembled" loading="lazy"></td>
+              <td><b>MG90S metal-gear micro servo</b><br><span class="note-muted">Housing removed; motor, gears, potentiometer and board
+                  rebuilt inside the finger frame. Thumb 4, each other finger 3.</span></td>
+              <td class="num">16</td><td class="num">2,090</td><td class="num">33,440</td>
+            </tr>
+            <tr>
+              <td><img class="bom-img" src="static/images/parts/printed.jpg" alt="Printed palm and finger modules" loading="lazy"></td>
+              <td><b>eSUN PLA+ filament, 1 kg</b><br><span class="note-muted">Palm, finger links and servo frames, all 3D-printed.</span></td>
+              <td class="num">1</td><td class="num">19,800</td><td class="num">19,800</td>
+            </tr>
+            <tr>
+              <td><img class="bom-img" src="static/images/parts/psu.jpg" alt="5 V switching power supply" loading="lazy"></td>
+              <td><b>5 V 18 A SMPS</b><br><span class="note-muted">Servo power, wired directly to the PCA9685 V+ terminal.</span></td>
+              <td class="num">1</td><td class="num">16,800</td><td class="num">16,800</td>
+            </tr>
+            <tr>
+              <td><img class="bom-img" src="static/images/parts/esp32.jpg" alt="ESP32 development board" loading="lazy"></td>
+              <td><b>ESP32 development board</b><br><span class="note-muted">Receives joint targets from the PC over USB serial.</span></td>
+              <td class="num">1</td><td class="num">7,000</td><td class="num">7,000</td>
+            </tr>
+            <tr>
+              <td><div class="bom-icon"><i class="fas fa-plug"></i></div></td>
+              <td><b>Wiring and consumables</b><br><span class="note-muted">Jumper wire set, elastic cord for the passive fingertips, adhesive, etc.</span></td>
+              <td class="num">1</td><td class="num">5,000</td><td class="num">5,000</td>
+            </tr>
+            <tr>
+              <td><img class="bom-img" src="static/images/parts/pca9685.jpg" alt="PCA9685 16-channel PWM driver board" loading="lazy"></td>
+              <td><b>PCA9685 16-channel PWM servo driver</b><br><span class="note-muted">I²C from the ESP32; one channel per actuated joint.</span></td>
+              <td class="num">1</td><td class="num">3,300</td><td class="num">3,300</td>
+            </tr>
+            <tr>
+              <td><div class="bom-icon"><i class="fas fa-screwdriver-wrench"></i></div></td>
+              <td><b>M3 bolts and nuts</b><br><span class="note-muted">M3 bolts (12 mm and others) and an M3 nut set.</span></td>
+              <td class="num">1</td><td class="num">2,000</td><td class="num">2,000</td>
+            </tr>
+            <tr class="highlight-row">
+              <td></td><td>Total</td><td></td><td></td><td class="num">87,340</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note-muted">Prices from Table 5 of the KSME final report (2026). Table 6 of the report PDF lists about
+        130,000 KRW; the itemised total in Table 5 is 87,340 KRW. Shipping and tools (3D printer, soldering iron,
+        screwdrivers) are not included.</p>
+
+      <h2 class="title is-3 section-heading mt-5" id="assembly">Build Steps</h2>
+      <p class="section-sub">The order of fabrication used for the prototype.</p>
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-4">
+          <div class="step-card"><div class="step-num">1</div><b>Print the parts.</b> Finger links, palm and the
+            servo-holding frames, all in PLA+.</div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="step-card"><div class="step-num">2</div><b>Rebuild the servos.</b> Open each MG90S, discard the
+            housing and fit the motor, gears, potentiometer and board into a printed frame, extending and soldering
+            the wires.</div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="step-card"><div class="step-num">3</div><b>Assemble the fingers.</b> Join the MCP and PIP
+            units and fit the PIP–DIP link on the four common fingers.</div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="step-card"><div class="step-num">4</div><b>Build the thumb.</b> Same lower structure, plus a
+            separate DIP servo instead of the link.</div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="step-card"><div class="step-num">5</div><b>Mount the modules.</b> Attach the finger modules and
+            the thumb to the palm through their detachable interfaces.</div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="step-card"><div class="step-num">6</div><b>Wire it up.</b> Servos to the PCA9685, PCA9685 to the
+            ESP32 and the 5 V supply, and the ESP32 to the PC over USB.</div>
+        </div>
+      </div>
+      <div class="row g-3 justify-content-center mt-3">
+        <div class="col-6 col-md-3">
+          <div class="fig-frame photo tall"><img src="static/images/servo_stock.jpg" alt="Stock MG90S servo taken apart" loading="lazy"></div>
+          <p class="figure-caption">Step 2: stock MG90S, opened</p>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="fig-frame photo tall"><img src="static/images/servo_rearranged.jpg" alt="Servo parts rebuilt in a printed frame" loading="lazy"></div>
+          <p class="figure-caption">Step 2: rebuilt in a finger frame</p>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="fig-frame tall"><img src="static/images/modules_no_thumb.jpg" alt="Four finger modules mounted on the palm" loading="lazy"></div>
+          <p class="figure-caption">Step 5: four finger modules mounted</p>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="fig-frame photo tall"><img src="static/images/hand_front.jpg" alt="Finished hand" loading="lazy"></div>
+          <p class="figure-caption">Finished hand</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered note-muted">
+        <p><a href="./">Back to the main page</a> · Page layout follows the
+          <a href="https://v1.leaphand.com/" target="_blank" rel="noopener">LEAP Hand</a> project page.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

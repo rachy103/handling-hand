@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Handling Hand: Low-Cost Modular 16-DoF Robotic Hand</title>
+  <meta name="description"
+    content="Handling Hand: a low-cost, modular 16-DoF robotic hand built from MG90S hobby servos rearranged inside 3D-printed fingers. Parts cost 87,340 KRW.">
+  <meta name="keywords" content="Robot Hand, Dexterous Manipulation, Low-Cost, Modular, Servo, 3D Printing">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Handling Hand: Low-Cost Modular 16-DoF Robotic Hand">
+  <meta property="og:description"
+    content="A 16-DoF robotic hand built from hobby servos rearranged inside 3D-printed fingers, for 87,340 KRW in parts.">
+  <meta property="og:url" content="https://rachy103.github.io/handling-hand/">
+  <meta property="og:image" content="https://rachy103.github.io/handling-hand/static/images/hand_front.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✋</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500,700|Noto+Sans:400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400&text=%EA%B8%89%EB%8B%A4%EB%8F%84%EB%93%88%EB%93%A4%EB%A1%9C%EB%A7%81%EB%AA%A8%EB%B3%B4%EB%B4%87%EC%86%90%EC%9C%A0%EC%9E%90%ED%95%B8%ED%98%95%ED%99%94&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="static/js/index.js" defer></script>
+  <script src="static/js/charts.js" defer></script>
+</head>
+
+<body>
+  <!-- ================= NAVBAR ================= -->
+  <nav class="navbar navbar-expand-lg navbar-light site-nav">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#siteNav"
+        aria-controls="siteNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="siteNav">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="./">Main Page</a></li>
+          <li class="nav-item"><a class="nav-link" href="parts.html">Parts</a></li>
+          <li class="nav-item"><a class="nav-link" href="#design">Design</a></li>
+          <li class="nav-item"><a class="nav-link" href="#full-videos">Videos</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= TITLE ================= -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Handling Hand:</h1>
+            <p class="title publication-title publication-subtitle">
+              A Low-Cost Modular 16-DoF Robotic Hand<br>with Servos Rearranged Inside the Fingers
+            </p>
+            <p class="ko-title" lang="ko">보급형 모듈화 다자유도 로봇손</p>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block author-name">Jeonghwan Park</span>
+              <span class="author-block author-name">Taehwan Yoon</span>
+              <span class="author-block author-name">Seunghwan Um</span>
+              <span class="author-block author-name">Hyouk Ryeol Choi<sup>&dagger;</sup></span>
+              <br>School of Mechanical Engineering, Sungkyunkwan University (SKKU)<br>
+              <span class="publication-venue">16th KSME National Student Design Competition, 2026</span>
+              <br><span class="note-muted">Team Handling (<span lang="ko">핸들링</span>) &nbsp;·&nbsp; <sup>&dagger;</sup>Faculty advisor</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="#video" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-play"></i></span><span>Video</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="parts.html" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-list-check"></i></span><span>Parts</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#dof" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-cube"></i></span><span>3D Model</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#sim" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-microchip"></i></span><span>MuJoCo</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#BibTeX" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-quote-right"></i></span><span>BibTeX</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered mx-0">
+      <div class="column is-two-thirds">
+        <div class="alert alert-success text-center news-alert mx-3" role="alert">
+          <strong>Sep 2026:</strong> Our final design report was submitted to the 16th KSME National Student Design
+          Competition (University division).
+        </div>
+      </div>
+    </div>
+
+    <div class="content has-text-centered px-3">
+      <video id="video" class="teaser-video" controls playsinline preload="metadata" poster="static/videos/teaser.jpg"
+        width="1280" height="720">
+        <source src="static/videos/teaser.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <!-- ================= ABSTRACT ================= -->
+  <section class="section pt-4">
+    <div class="container">
+      <div class="columns is-centered has-text-centered mx-0">
+        <div class="column is-two-thirds">
+          <h2 class="title is-2">Abstract</h2>
+          <div class="content has-text-justified">
+            <p class="abstract-text">
+              Dexterous multi-fingered hands are in growing demand for humanoid, service and robot-learning research, yet
+              commercial hands such as the Allegro and Shadow hands rely on dedicated actuators or tendon transmissions and
+              cost from tens of millions to over a hundred million won, while recent 3D-printed tendon-driven hands such as
+              RUKA and ORCA still cost millions of won and inherit the assembly and tensioning burden of tendon drives. We
+              present Handling Hand, a modular 16-DoF robotic hand of human-hand size (about 20&nbsp;cm tall) built only
+              from commercial MG90S hobby servos and 3D-printed PLA+ parts. Each servo is taken out of its housing, and its
+              motor, gear train, potentiometer and control board are rearranged inside a finger-shaped frame, so the
+              actuators sit directly in the fingers while keeping the servo's own position control. In the
+              index-to-little fingers, the DIP joint is coupled to the PIP joint by a rigid link whose nonlinear angle
+              relation we derive from the link geometry; an elastic-cord passive fingertip compensates for the fixed
+              coupling, and the thumb gets an independently actuated DIP joint. The four fingers use one identical module
+              design, and each detaches from the palm on its own, so repairs can be made at the finger or servo level. A
+              MuJoCo grasp simulation checked the design before the final hand was built, and the hand is driven by an
+              ESP32 and a PCA9685 servo driver. The prototype performs enveloping and fingertip grasps on objects of
+              different sizes and, mounted on a collaborative arm, multi-step tasks such as unscrewing a light bulb and
+              wiping a whiteboard, at a parts cost of 87,340&nbsp;KRW: less than 1% of the price of commercial multi-DoF
+              hands.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3 justify-content-center mt-1 stat-row">
+        <div class="col-6 col-md-3">
+          <div class="stat-card"><div class="stat-value">16</div><div class="stat-label">actuated DoF<br>(thumb 4 + 4 × 3)</div></div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card"><div class="stat-value">₩87,340</div><div class="stat-label">total parts cost<br>(&lt; 1% of commercial hands)</div></div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card"><div class="stat-value">~20 cm</div><div class="stat-label">tall, adult-hand size<br>5 fingers</div></div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card"><div class="stat-value">MG90S</div><div class="stat-label">16 hobby servos, rebuilt<br>inside the fingers</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DEMOS ================= -->
+  <section class="section pt-2" id="demos">
+    <div class="container">
+      <p class="note-muted has-text-centered mb-4">
+        In most demonstrations the hand is mounted on a 6-axis collaborative robot arm. Clips are muted and sped up
+        where marked; uncut videos are at the <a href="#full-videos">bottom of the page</a>.
+      </p>
+
+      <h2 class="title is-3 section-heading">Unscrewing a Light Bulb</h2>
+      <p class="section-sub">The hand closes around a lit bulb, and the lamp goes dark as the twist breaks the
+        contact. It unscrews the bulb with repeated grasp–twist–release cycles; when the bulb comes free it drops onto
+        the table, and the hand reaches behind the socket to pick it back up.</p>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="clip-wrap"><video class="clip autoloop" muted loop playsinline preload="none" width="960" height="720"
+              data-poster="static/videos/bulb_lights_off.jpg" data-src="static/videos/bulb_lights_off.mp4"></video><span class="speed-badge">1.5×</span></div>
+          <p class="clip-caption">Twisting a lit bulb until the lamp goes dark</p>
+        </div>
+        <div class="col-md-4">
+          <div class="clip-wrap"><video class="clip autoloop" muted loop playsinline preload="none" width="960" height="720"
+              data-poster="static/videos/bulb_ratchet.jpg" data-src="static/videos/bulb_ratchet.mp4"></video><span class="speed-badge">3×</span></div>
+          <p class="clip-caption">Fingertip grasp, wrist turn, release, repeat</p>
+        </div>
+        <div class="col-md-4">
+          <div class="clip-wrap"><video class="clip autoloop" muted loop playsinline preload="none" width="960" height="720"
+              data-poster="static/videos/bulb_pickup.jpg" data-src="static/videos/bulb_pickup.mp4"></video><span class="speed-badge">2×</span></div>
+          <p class="clip-caption">Recovery: the freed bulb fell behind the socket; the hand pinches it and lifts it</p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="clip-wrap"><video class="clip autoloop" muted loop playsinline preload="none" width="1280" height="720"
+              data-poster="static/videos/bulb_full_8x.jpg" data-src="static/videos/bulb_full_8x.mp4"></video><span class="speed-badge">8×</span></div>
+          <p class="clip-caption">Take 2 in full, about two minutes: the lamp goes dark, regrasp cycles, the bulb comes
+            free and drops, then it is picked up</p>
+        </div>
+      </div>
+
+      <h2 class="title is-3 section-heading mt-5">Pick, Open, Drop, Close</h2>
+      <p class="section-sub">A long-horizon task with a soft object: an enveloping grasp of a plush toy, pushing a
+        bin lid open while still holding it, a quick release into the bin, and pushing the lid shut with the fingertips.</p>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="clip-wrap"><video class="clip autoloop" muted loop playsinline preload="none" width="960" height="720"
+              data-poster="static/videos/pick_throw_full.jpg" data-src="static/videos/pick_throw_full.mp4"></video><span class="speed-badge">3×</span></div>
+          <p class="clip-caption">Grasp the plush, press the spring lid open, drop it in</p>
+        </div>
+        <div class="col-md-4">
+          <div class="clip-wrap"><video class="clip autoloop" muted loop playsinline preload="none" width="960" height="720"
+              data-poster="static/videos/ptc_grasp_open.jpg" data-src="static/videos/ptc_grasp_open.mp4"></video><span class="speed-badge">3×</span></div>
+          <p class="clip-caption">The plush deforms in the grasp; the fingertips push the lid open</p>
+        </div>
+        <div class="col-md-4">
+          <div class="clip-wrap"><video class="clip autoloop" muted loop playsinline preload="none" width="960" height="720"
+              data-poster="static/videos/ptc_toss_close.jpg" data-src="static/videos/ptc_toss_close.mp4"></video><span class="speed-badge">2×</span></div>
+          <p class="clip-caption">Release into the bin, then close the lid with the fingertips</p>
+        </div>
+      </div>
+
+      <h2 class="title is-3 section-heading mt-5">Tool Use: Tissue and Eraser</h2>
+      <p class="section-sub">A thumb–finger pinch pulls a single tissue out of a dispenser and lays it on a
+        whiteboard; the hand then picks up an eraser and scrubs the marker off through the tissue.</p>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="clip-wrap"><video class="clip autoloop" muted loop playsinline preload="none" width="960" height="720"
+              data-poster="static/videos/tissue_pick_lay.jpg" data-src="static/videos/tissue_pick_lay.mp4"></video><span class="speed-badge">4×</span></div>
+          <p class="clip-caption">Pinching a tissue from a pop-up box and draping it on the board</p>
+        </div>
+        <div class="col-md-4">
+          <div class="clip-wrap"><video class="clip autoloop" muted loop playsinline preload="none" width="960" height="720"
+              data-poster="static/videos/eraser_pick_place.jpg" data-src="static/videos/eraser_pick_place.mp4"></video><span class="speed-badge">3×</span></div>
+          <p class="clip-caption">Thumb-versus-fingers grasp of a whiteboard eraser</p>
+        </div>
+        <div class="col-md-4">
+          <div class="clip-wrap"><video class="clip autoloop" muted loop playsinline preload="none" width="960" height="720"
+              data-poster="static/videos/eraser_wipe.jpg" data-src="static/videos/eraser_wipe.mp4"></video><span class="speed-badge">3×</span></div>
+          <p class="clip-caption">Re-grasp and wipe: the tissue drags across the board</p>
+        </div>
+      </div>
+
+      <h2 class="title is-3 section-heading mt-5">Fingertip Pinch of a Thin Object</h2>
+      <p class="section-sub">With the other fingers held straight, one finger and the thumb reach the table on either
+        side of a marker lying flat, center it and pinch it. On lift-off the marker pivots 90° between the fingertip
+        caps and stays pinched as the hand lifts it off the table.</p>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="clip-wrap"><video class="clip autoloop" muted loop playsinline preload="none" width="1280" height="720"
+              data-poster="static/videos/pinch_marker.jpg" data-src="static/videos/pinch_marker.mp4"></video><span class="speed-badge">2.5×</span></div>
+          <p class="clip-caption">Approach and pinch a marker lying flat on the table</p>
+        </div>
+        <div class="col-md-4">
+          <div class="clip-wrap"><video class="clip autoloop" muted loop playsinline preload="none" width="1280" height="720"
+              data-poster="static/videos/pinch_nudge.jpg" data-src="static/videos/pinch_nudge.mp4"></video><span class="speed-badge">1×</span></div>
+          <p class="clip-caption">Nudging and centering the marker between the fingertips</p>
+        </div>
+        <div class="col-md-4">
+          <div class="clip-wrap"><video class="clip autoloop" muted loop playsinline preload="none" width="1280" height="720"
+              data-poster="static/videos/pinch_pivot.jpg" data-src="static/videos/pinch_pivot.mp4"></video><span class="speed-badge">1.5×</span></div>
+          <p class="clip-caption">The marker pivots 90° in the pinch, then is lifted off the table</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DESIGN ================= -->
+  <section class="section pt-3" id="design">
+    <div class="container">
+      <h2 class="title is-3 section-heading">Design: A Servo Rebuilt Inside the Finger</h2>
+      <p class="section-sub">A stock MG90S micro servo is a DC motor, a multi-stage reduction gear train, a
+        potentiometer and a control board inside a boxy housing that does not fit a human-sized finger. We discard the
+        housing and relocate the motor and gears along the length of the finger, keeping the original gear meshing and
+        reduction, in a 3D-printed frame sized to the finger's width and thickness. The frame doubles as the phalanx and
+        supports the actuator, each joint is actuated in place without tendons, and the unit is still commanded with a
+        target angle like an unmodified servo.</p>
+      <div class="row g-3 justify-content-center">
+        <div class="col-6 col-lg-4">
+          <div class="fig-frame photo"><img src="static/images/servo_stock.jpg" alt="A stock MG90S micro servo taken apart" loading="lazy" width="1100" height="1100"></div>
+          <p class="figure-caption">(a) Stock MG90S, disassembled</p>
+        </div>
+        <div class="col-6 col-lg-4">
+          <div class="fig-frame photo"><img src="static/images/servo_rearranged.jpg" alt="The same servo parts rearranged into a finger-shaped printed frame" loading="lazy" width="1100" height="1100"></div>
+          <p class="figure-caption">(b) Rearranged into a finger-shaped frame</p>
+        </div>
+      </div>
+
+      <div class="row g-4 justify-content-center align-items-center mt-1">
+        <div class="col-lg-7">
+          <img class="figure-img" src="static/images/joint_diagram.png" alt="Diagram of one finger: two servos at the MCP joint, one servo at the PIP joint, and a link-driven DIP joint with a passive fingertip" loading="lazy" width="1400" height="309">
+          <p class="figure-caption">Joints of one finger and how each is driven</p>
+        </div>
+        <div class="col-lg-5">
+          <table class="table table-sm spec-table compare-table">
+            <thead><tr><th scope="col"></th><th scope="col">Stock servo as-is</th><th scope="col">Tendon drive</th><th scope="col">Rearranged servo (ours)</th></tr></thead>
+            <tbody>
+              <tr><td>Cost</td><td>Low</td><td>Medium</td><td>Low</td></tr>
+              <tr><td>Control difficulty</td><td>Low</td><td>High</td><td>Low</td></tr>
+              <tr><td>Space efficiency</td><td>Low</td><td>High</td><td>High</td></tr>
+              <tr><td>Fabrication difficulty</td><td>Low</td><td>High</td><td>Medium</td></tr>
+              <tr><td>Maintainability</td><td>High</td><td>Medium</td><td>High</td></tr>
+              <tr><td>Actuator inside the finger</td><td>Hard</td><td>Not needed</td><td>Possible</td></tr>
+            </tbody>
+          </table>
+          <p class="note-muted">Each index-to-little finger has three servo units: MCP abduction, MCP flexion and PIP
+            flexion. The DIP joint has no motor; it follows the PIP through a rigid link.</p>
+        </div>
+      </div>
+
+      <!-- PIP-DIP linkage -->
+      <h3 class="title is-3 section-heading mt-5">PIP–DIP Linkage</h3>
+      <p class="section-sub">The DIP joint follows the PIP through a rigid link placed so
+        that both joints agree at 0° and 90°. In between, the relation is deliberately nonlinear: early in flexion
+        the DIP lags by up to about 2.5°, so the fingertip approaches the object fairly straight, and in mid-range it
+        leads by up to about 6°, so the finger curls around the object. Drag across the plot or use the slider.</p>
+      <div class="chart-card" id="linkage-explorer"></div>
+      <p class="note-muted has-text-centered mt-2">φ(θ) from the team's computed table of the link geometry
+        (<a href="static/data/pip_dip.json">data</a>).</p>
+
+      <!-- Passive fingertip & thumb -->
+      <h3 class="title is-3 section-heading mt-5">Passive Fingertip and an Independent Thumb DIP</h3>
+      <p class="section-sub">Because the linked DIP cannot adapt on its own, small objects touched near the tip could
+        get poor contact. The fingertip is tied to the top of the DIP segment with an elastic cord: it holds its
+        default pose, folds back under contact force, and springs back when released, with no extra actuator. The
+        thumb instead gets its own DIP servo (4 DoF), which made the thumb grasp less awkward than in the first design.</p>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <img class="figure-img" src="static/images/tip_rest.jpg" alt="Fingertip at rest" loading="lazy" width="1400" height="653">
+          <p class="figure-caption">(a) No external force</p>
+        </div>
+        <div class="col-md-6">
+          <img class="figure-img" src="static/images/tip_pressed.jpg" alt="Fingertip deflected by a pushing tool" loading="lazy" width="1400" height="653">
+          <p class="figure-caption">(b) The fingertip folds back under contact force</p>
+        </div>
+      </div>
+      <div class="row g-3 justify-content-center">
+        <div class="col-12 col-md-4">
+          <div class="fig-frame photo tall"><img src="static/images/pinch_thin.jpg" alt="Index and thumb fingertips pinching a small screwdriver" loading="lazy" width="1095" height="1200"></div>
+          <p class="figure-caption">(c) Fingertip grasp of a thin object</p>
+        </div>
+      </div>
+
+      <!-- 16 DoF & modularity -->
+      <h3 class="title is-3 section-heading mt-5" id="dof">16 DoF, Modular Fingers</h3>
+      <p class="section-sub">The four fingers are identical modules (3 DoF plus the linked DIP) that detach
+        individually from the palm and can swap positions; the thumb reuses the same lower (MCP) structure and differs
+        only in its distal part. A damaged servo can be replaced inside its module without rebuilding the finger.
+        The video shows the 3D model.</p>
+      <div class="row g-4 align-items-stretch">
+        <div class="col-lg-7">
+          <div class="viewer-card" id="viewer-host">
+            <video src="static/videos/hand_turntable.mp4" poster="static/videos/hand_turntable.jpg" autoplay loop muted
+              playsinline preload="metadata" aria-label="The hand model turning while the fingers open, close and pinch"
+              style="width:100%;height:100%;object-fit:contain;display:block"></video>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <table class="table table-sm spec-table">
+            <thead><tr><th scope="col">Digit</th><th scope="col">Actuated joints</th><th scope="col" class="num">DoF</th></tr></thead>
+            <tbody>
+              <tr><td>Thumb</td><td>MCP flexion, MCP abduction, PIP, DIP</td><td class="num">4</td></tr>
+              <tr><td>Index</td><td>MCP flexion, MCP abduction, PIP (+ linked DIP)</td><td class="num">3</td></tr>
+              <tr><td>Middle</td><td>MCP flexion, MCP abduction, PIP (+ linked DIP)</td><td class="num">3</td></tr>
+              <tr><td>Ring</td><td>MCP flexion, MCP abduction, PIP (+ linked DIP)</td><td class="num">3</td></tr>
+              <tr><td>Little</td><td>MCP flexion, MCP abduction, PIP (+ linked DIP)</td><td class="num">3</td></tr>
+              <tr class="highlight-row"><td>Total</td><td>16 servos + 4 passive linked DIP joints</td><td class="num">16</td></tr>
+            </tbody>
+          </table>
+          <p class="note-muted">PIP flexes 0–90° and the linked DIP follows over 0–90°. The MCP flexion and abduction
+            ranges have not been measured yet.</p>
+          <div class="row g-2">
+            <div class="col-6">
+              <div class="fig-frame photo tall"><img src="static/images/modules_outline.jpg" alt="Photo with the common finger structures outlined in red and the thumb-specific DIP part in green" loading="lazy" width="650" height="900"></div>
+              <p class="figure-caption"><span style="color:#d03b3b">■</span> common structure,
+                <span style="color:#0ca30c">■</span> thumb-specific DIP part</p>
+            </div>
+            <div class="col-6">
+              <div class="fig-frame tall"><img src="static/images/modules_no_thumb.jpg" alt="Palm with the four identical finger modules and the thumb removed" loading="lazy" width="869" height="1400"></div>
+              <p class="figure-caption">Four identical modules mounted, thumb detached</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Control -->
+      <h3 class="title is-3 section-heading mt-5">Control and Electronics</h3>
+      <p class="section-sub">A PC sends joint targets over USB serial to an ESP32, which drives a PCA9685
+        16-channel PWM board over I²C, one channel per actuated joint. Each rebuilt servo closes its own position
+        loop with its original potentiometer, so no external joint sensors are needed. Servo power comes from a
+        separate 5&nbsp;V supply wired to the PCA9685 V+ terminal, so current spikes do not disturb the logic.</p>
+      <div class="block-diagram">
+        <div class="blk">PC<small>motion command</small></div>
+        <div class="arr">USB serial</div>
+        <div class="blk">ESP32<small>MCU</small></div>
+        <div class="arr">I²C</div>
+        <div class="blk">PCA9685<small>16-ch PWM driver</small></div>
+        <div class="arr">PWM × 16</div>
+        <div class="blk">16 rebuilt servos<small>robot hand</small></div>
+      </div>
+      <div class="block-diagram mt-0">
+        <div class="blk power">5 V supply<small>servo power (V+), separate from logic</small></div>
+      </div>
+      <div class="row justify-content-center mt-2">
+        <div class="col-lg-7">
+          <img class="figure-img" src="static/images/wiring.jpg" alt="Wiring of the ESP32, PCA9685 and 5 V power supply to the hand" loading="lazy" width="1600" height="1178">
+          <p class="figure-caption">The complete system: 5 V supply, ESP32, PCA9685 and the hand</p>
+        </div>
+      </div>
+
+      <!-- Grasps -->
+      <h3 class="title is-3 section-heading mt-5">Grasping Objects of Different Sizes</h3>
+      <p class="section-sub">Each grasp follows three steps: MCP abduction sets the finger spacing and the thumb moves
+        into opposition; MCP and PIP flex, and the linked DIP curls each finger around the object; on contact the
+        passive fingertips comply while the thumb DIP presses from the opposite side. Spreading the fingers lets the
+        hand wrap a large object, medium objects are grasped without spreading, and thin objects are held at the
+        fingertips.</p>
+      <div class="row g-3 justify-content-center">
+        <div class="col-md-4">
+          <div class="fig-frame photo"><img src="static/images/grasp_roll.jpg" alt="The hand wrapping a large paper-towel roll with fingers spread" loading="lazy" width="989" height="1300"></div>
+          <p class="figure-caption">(a) Large object, fingers spread by MCP abduction</p>
+        </div>
+        <div class="col-md-4">
+          <div class="fig-frame photo"><img src="static/images/grasp_can.jpg" alt="The hand gripping a spray can" loading="lazy" width="1219" height="1300"></div>
+          <p class="figure-caption">(b) Medium object, no spreading</p>
+        </div>
+        <div class="col-md-4">
+          <div class="fig-frame photo"><img src="static/images/grasp_marker.jpg" alt="A marker held upright between two fingertips" loading="lazy" width="900" height="900"></div>
+          <p class="figure-caption">(c) Thin object (a marker) held at the fingertips</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SIMULATION ================= -->
+  <section class="section pt-3" id="sim">
+    <div class="container">
+      <h2 class="title is-3 section-heading">Simulation</h2>
+      <p class="section-sub">The Inventor assembly was exported to URDF and MJCF and tested in MuJoCo before the final
+        hand was built. Closing the hand quasi-statically around a YCB mustard bottle, the four fingers wrap one side,
+        the thumb opposes and the palm supports the bottle. The forces below are simulated contact forces, not measured
+        grip force.</p>
+      <div class="row g-3 align-items-center">
+        <div class="col-md-5">
+          <img class="figure-img" src="static/images/mujoco_mustard.jpg" alt="MuJoCo render of the hand grasping a yellow mustard bottle" loading="lazy" width="900" height="525">
+          <p class="figure-caption">MuJoCo grasp of the YCB mustard bottle</p>
+        </div>
+        <div class="col-md-7">
+          <div class="chart-card">
+            <div class="chart-title">Contact normal force during a quasi-static close sweep (MuJoCo)</div>
+            <div id="sim-force-chart"></div>
+            <p class="note-muted mb-0">Each point settled for 1 s in simulation; peak total 32.7 N. The run used the
+              earlier simulation model, in which the finger DIP joints were commanded separately rather than through
+              the linkage. One failed step (close = 0.36, where the fingers did not close) is not plotted.
+              Hover or tap for values. <a href="static/data/sim_quasistatic.csv">Data (CSV)</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COST ================= -->
+  <section class="section pt-3" id="cost">
+    <div class="container">
+      <h2 class="title is-3 section-heading">Cost</h2>
+      <p class="section-sub">The whole hand costs <b>87,340 KRW</b> in parts, with the 16 servos about 38% of it. Because
+        every actuator is an off-the-shelf hobby servo, a broken joint is fixed by swapping a servo that costs a few
+        thousand won. <a href="parts.html">See the full parts list.</a></p>
+      <div class="row g-4">
+        <div class="col-lg-5">
+          <table class="table table-striped table-sm spec-table">
+            <thead><tr><th scope="col">Item</th><th scope="col" class="num">Qty</th><th scope="col" class="num">Cost (KRW)</th></tr></thead>
+            <tbody>
+              <tr><td>MG90S metal-gear micro servo</td><td class="num">16</td><td class="num">33,440</td></tr>
+              <tr><td>eSUN PLA+ filament, 1 kg</td><td class="num">1</td><td class="num">19,800</td></tr>
+              <tr><td>5 V 18 A SMPS</td><td class="num">1</td><td class="num">16,800</td></tr>
+              <tr><td>ESP32 dev board</td><td class="num">1</td><td class="num">7,000</td></tr>
+              <tr><td>Wiring and consumables</td><td class="num">1</td><td class="num">5,000</td></tr>
+              <tr><td>PCA9685 16-ch PWM driver</td><td class="num">1</td><td class="num">3,300</td></tr>
+              <tr><td>M3 bolts and nuts</td><td class="num">1</td><td class="num">2,000</td></tr>
+              <tr class="highlight-row"><td>Total</td><td></td><td class="num">87,340</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-lg-7">
+          <div class="table-responsive">
+            <table class="table table-sm spec-table">
+              <thead>
+                <tr><th scope="col">Hand</th><th scope="col">Actuation</th><th scope="col">DoF</th><th scope="col">Price</th><th scope="col">Repair</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Shadow Hand</td><td>Forearm motors + tendons</td><td>20 act. / 24 joints</td><td>≥ 100M KRW (US$100k+)</td><td>Manufacturer service</td></tr>
+                <tr><td>Allegro Hand</td><td>Dedicated DC motors in the fingers</td><td>16 (4 fingers)</td><td>≈ 20M KRW (US$15k+)</td><td>Manufacturer service</td></tr>
+                <tr><td>RUKA / ORCA</td><td>3D-printed, tendon-driven</td><td>15–17</td><td>≈ 2–4M KRW (build)</td><td>User-built, open source</td></tr>
+                <tr><td>LEAP Hand</td><td>Off-the-shelf Dynamixel servos</td><td>16 (4 fingers)</td><td>&lt; US$2,000</td><td>User-built, off-the-shelf servos</td></tr>
+                <tr class="highlight-row"><td>Handling Hand</td><td>Rearranged geared hobby servos, mounted at the actuated joints inside the fingers</td><td>16 (5 fingers)</td><td>87,340 KRW (parts)</td><td>Swap a finger module or a single servo</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note-muted">Prices are approximate. Allegro, Shadow and RUKA/ORCA are from the KSME report (Tables 1
+            and 6), our hand from the itemised parts list (Table 5; Table 6 of the report PDF misprints it as about
+            130,000 KRW), and LEAP from <a href="https://v1.leaphand.com/" target="_blank" rel="noopener">leaphand.com</a>.</p>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-2">
+        <div class="col-lg-7">
+          <div class="chart-card">
+            <div class="chart-title">Design comparison on six indices (1 = low, 5 = high)</div>
+            <div id="radar-chart"></div>
+            <p class="note-muted mb-1">Qualitative scores defined by the team from public specifications and each design's
+              actuation method; hover or tap an axis for values.</p>
+            <details class="data-table">
+              <summary>Show as a table</summary>
+              <table class="table table-sm spec-table mt-2">
+                <thead><tr><th scope="col"></th><th scope="col" class="num">Ours</th><th scope="col" class="num">Allegro</th><th scope="col" class="num">Shadow</th><th scope="col" class="num">RUKA / ORCA</th></tr></thead>
+                <tbody>
+                  <tr><td>Low cost</td><td class="num">5</td><td class="num">1.5</td><td class="num">1</td><td class="num">3</td></tr>
+                  <tr><td>Module replaceability</td><td class="num">4.5</td><td class="num">3.5</td><td class="num">2</td><td class="num">3</td></tr>
+                  <tr><td>User maintainability</td><td class="num">4.5</td><td class="num">2.5</td><td class="num">1.5</td><td class="num">2.5</td></tr>
+                  <tr><td>Human-hand size</td><td class="num">4</td><td class="num">3</td><td class="num">4</td><td class="num">4</td></tr>
+                  <tr><td>Number of DoF</td><td class="num">4</td><td class="num">4</td><td class="num">5</td><td class="num">4</td></tr>
+                  <tr><td>Ease of control</td><td class="num">4</td><td class="num">4</td><td class="num">3</td><td class="num">3</td></tr>
+                </tbody>
+              </table>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DEVELOPMENT ================= -->
+  <section class="section pt-3" id="development">
+    <div class="container">
+      <h2 class="title is-3 section-heading">From Mid-Term Design to Final Hand</h2>
+      <p class="section-sub">In the mid-term report (July 2026) the thumb used the same linked DIP as the other
+        fingers. Simulation and prototype tests showed that this limited the thumb-tip posture, so the final hand gives
+        the thumb its own DIP servo. Passive elastic fingertips were also added to improve fingertip contact on small
+        objects.</p>
+      <div class="row g-3 justify-content-center">
+        <div class="col-6 col-md-3">
+          <div class="fig-frame tall"><img src="static/images/cad_midterm.jpg" alt="Mid-term CAD with a straight, link-driven thumb" loading="lazy" width="639" height="665"></div>
+          <p class="figure-caption">Mid-term CAD (Jul 2026)</p>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="fig-frame tall"><img src="static/images/cad_front.jpg" alt="Final CAD with the thumb-specific DIP module" loading="lazy" width="894" height="970"></div>
+          <p class="figure-caption">Final CAD</p>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="fig-frame photo tall"><img src="static/images/hand_front.jpg" alt="Final fabricated hand, front view" loading="lazy" width="1050" height="1400"></div>
+          <p class="figure-caption">Final hand, front</p>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="fig-frame photo tall"><img src="static/images/hand_side.jpg" alt="Final fabricated hand, side view" loading="lazy" width="796" height="1400"></div>
+          <p class="figure-caption">Final hand, side</p>
+        </div>
+      </div>
+
+      <h3 class="title is-4 section-heading mt-5">Design Problems and Fixes</h3>
+      <div class="table-responsive">
+        <table class="table table-sm spec-table problems-table">
+          <thead><tr><th scope="col">Problem</th><th scope="col">Cause</th><th scope="col">Fix</th><th scope="col">Result</th></tr></thead>
+          <tbody>
+            <tr><td>No room for a servo inside the finger</td><td>The stock servo housing does not fit the finger shape</td><td>Rearrange the motor, gears and electronics to the finger shape and print a dedicated frame</td><td>The drive sits inside the finger</td></tr>
+            <tr><td>Driving the DIP</td><td>Avoid an extra servo for the DIP</td><td>Compute the link pivot positions and length from the PIP and DIP geometry before and after rotation</td><td>The DIP follows the PIP with no extra actuator</td></tr>
+            <tr><td>Joint play and print error</td><td>Additive manufacturing gives dimensional error and friction</td><td>Clearance-aware dimensions, post-processing and correction during assembly</td><td>Joints move without binding</td></tr>
+            <tr><td>Wear at joints and link connections</td><td>Thin sections at load paths, links and screw bosses</td><td>Thicker and reinforced load paths</td><td>No breakage in repeated motion</td></tr>
+            <tr><td>Poor fingertip contact on small objects</td><td>The linked DIP cannot set the fingertip posture on its own</td><td>Elastic passive fingertip on top of the DIP</td><td>The fingertip adapts to the object with no extra actuator</td></tr>
+            <tr><td>Awkward thumb grasps</td><td>Too few DoF at the thumb DIP</td><td>A separate servo for the thumb DIP</td><td>Independent thumb-tip posture</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note-muted">From Table 4 of the report. The durability result is qualitative; no cycle count was recorded.</p>
+
+      <h3 class="title is-4 section-heading mt-5">Limitations and Future Work</h3>
+      <div class="columns is-centered mx-0">
+        <div class="column is-two-thirds content">
+          <ul>
+            <li>Grip force on heavy objects is limited by the torque of the small servos, and the PLA+ parts are less
+              durable than the metal parts of commercial hands.</li>
+            <li>The DIP angle is fixed by the link geometry, so only the thumb has active fingertip posture.</li>
+            <li>Control is position-only, with no contact-force or joint-torque feedback, and grip force has not yet
+              been measured on the hardware; the 32.7 N above is a simulation value.</li>
+            <li>Planned: a metal frame, fingertip contact and tactile sensors, and current-based force estimation for
+              grasp-force control.</li>
+            <li>Intended uses: an education kit for kinematics, linkages and servo control; a low-cost hand for
+              teleoperation and imitation-learning data collection with several units in parallel; and early
+              end-effector prototypes for humanoid and service robots.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FULL VIDEOS ================= -->
+  <section class="section pt-3" id="full-videos">
+    <div class="container">
+      <h2 class="title is-3 section-heading">Uncut Videos</h2>
+      <p class="section-sub">Every demonstration at real-time speed, without cuts (720p, muted).</p>
+      <div class="row g-3 full-videos">
+        <div class="col-md-6 col-lg-4">
+          <video controls playsinline preload="none" width="1280" height="720" data-poster="static/videos/full_sweep_bulb_second.jpg" src="static/videos/full_sweep_bulb_second.mp4"></video>
+          <p class="vid-title">Unscrewing a light bulb, take 2 (2:25)</p>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <video controls playsinline preload="none" width="1280" height="720" data-poster="static/videos/full_sweep_bulb.jpg" src="static/videos/full_sweep_bulb.mp4"></video>
+          <p class="vid-title">Unscrewing a light bulb, take 1 (1:27)</p>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <video controls playsinline preload="none" width="1280" height="720" data-poster="static/videos/full_pick_tissue_erase.jpg" src="static/videos/full_pick_tissue_erase.mp4"></video>
+          <p class="vid-title">Tissue and eraser (1:41)</p>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <video controls playsinline preload="none" width="1280" height="720" data-poster="static/videos/full_pick_throw.jpg" src="static/videos/full_pick_throw.mp4"></video>
+          <p class="vid-title">Pick and drop into a bin (0:32)</p>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <video controls playsinline preload="none" width="1280" height="720" data-poster="static/videos/full_pick_throw_close.jpg" src="static/videos/full_pick_throw_close.mp4"></video>
+          <p class="vid-title">Pick, drop and close the lid (0:51)</p>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <video controls playsinline preload="none" width="1280" height="720" data-poster="static/videos/full_compliance_picking.jpg" src="static/videos/full_compliance_picking.mp4"></video>
+          <p class="vid-title">Fingertip pinch of a marker (0:20)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BIBTEX ================= -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <h2 class="title mb-0">BibTeX</h2>
+        <button class="btn btn-sm btn-outline-secondary" id="copy-bibtex" type="button">Copy</button>
+      </div>
+      <pre><code id="bibtex">@techreport{park2026handlinghand,
+  title       = {Low-Cost Modular Multi-{DOF} Robotic Hand},
+  author      = {Park, Jeonghwan and Yoon, Taehwan and Um, Seunghwan and Choi, Hyouk Ryeol},
+  institution = {Sungkyunkwan University},
+  type        = {Final design report},
+  note        = {16th KSME National Student Design Competition},
+  year        = {2026}
+}</code></pre>
+    </div>
+  </section>
+
+  <section class="section pt-0" id="Ack">
+    <div class="container is-max-desktop content">
+      <h2 class="title">Acknowledgements</h2>
+      <p>This project was carried out by team Handling (<span lang="ko">핸들링</span>), School of Mechanical Engineering,
+        Sungkyunkwan University, for the 16th KSME National Student Design Competition (2026). We thank Prof. Hyouk
+        Ryeol Choi for his guidance throughout the project.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered note-muted">
+        <p>Page layout follows the <a href="https://v1.leaphand.com/" target="_blank" rel="noopener">LEAP Hand</a> and
+          <a href="https://nerfies.github.io/" target="_blank" rel="noopener">Nerfies</a> project pages.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
